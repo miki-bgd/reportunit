@@ -270,8 +270,9 @@ namespace ReportUnit.Parser
 
                     if (message != null)
                     {
-                        errorMsg = "<pre>" + message.InnerText.Trim();
-                        errorMsg += testcase.SelectSingleNode(".//stack-trace") != null ? " -> " + testcase.SelectSingleNode(".//stack-trace").InnerText.Replace("\r", "").Replace("\n", "") : "";
+                        errorMsg = "<pre>" + message.InnerText.Trim() + "<br>";
+                        string msg = 
+                        errorMsg += testcase.SelectSingleNode(".//stack-trace") != null ? " -> " + testcase.SelectSingleNode(".//stack-trace").InnerText.Replace(" in ", " In<br>").Replace(" At ", " In<br>") : "";
                         errorMsg += "</pre>";
                         errorMsg = errorMsg == "<pre></pre>" ? "" : errorMsg;
                     }
