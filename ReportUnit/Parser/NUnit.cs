@@ -31,6 +31,7 @@ namespace ReportUnit.Parser
         /// </summary>
         private Report _report;
 
+
         /// <summary>
         /// Logger
         /// </summary>
@@ -271,8 +272,10 @@ namespace ReportUnit.Parser
                     if (message != null)
                     {
                         errorMsg = "<pre>" + message.InnerText.Trim() + "<br>";
-                        string msg = 
-                        errorMsg += testcase.SelectSingleNode(".//stack-trace") != null ? " -> " + testcase.SelectSingleNode(".//stack-trace").InnerText.Replace(" in ", " In<br>").Replace(" At ", " In<br>") : "";
+                        var xmlNode = testcase.SelectSingleNode(".//stack-trace");
+                        if (xmlNode != null)
+                            errorMsg += " -> " + StackTraceFrameParser.Instance.ParseFrame(xmlNode.InnerText);
+                        //errorMsg += xmlNode != null ? " -> " + xmlNode.InnerText.Replace(" in ", " <br>In ").Replace(" at ", " <br><br>At ") : "";
                         errorMsg += "</pre>";
                         errorMsg = errorMsg == "<pre></pre>" ? "" : errorMsg;
                     }

@@ -375,6 +375,9 @@
                                         display: none;
                                     }
                                 }
+                            .marked_lines{
+                                color:red;
+                            }
                             </style>
                             <!--%OPTIONALCSS%-->
                         </head>
@@ -423,7 +426,8 @@
                                         </div>
                                     </div>
                                     <div class='row'>
-                                        <div class='filters'>
+                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <!--%ASSEMBLYPATH%--> </div>
+                                        <div class='filters' style='padding-top:0px'>
                                             <div class='input-field col l3 m4 s12 suite-toggle'>
                                                 <select>
                                                     <option value='0' selected>Choose your option</option>
@@ -754,9 +758,10 @@
         {
             get
             {
-                return @"<tr>
-                            <td class='test-name'><!--%TESTNAME%--></td>
-                            <td class='<!--%TESTSTATUS%-->'><!--%TESTSTATUS%--><!--%TESTSTATUSMSG%--></td>
+                return @"
+                            <tr class='test-name' style='border-bottom:white'><td colspan='3'><!--%TESTNAME%--></td></tr>
+                            <tr>
+                            <td colspan='2' class='<!--%TESTSTATUS%-->'><!--%TESTSTATUS%--><!--%TESTSTATUSMSG%--></td>
                             <td class='test-features <!--%TESTFEATURE%-->'></td>
                         </tr>
                         <!--%INSERTTEST%-->";

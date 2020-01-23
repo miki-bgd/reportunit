@@ -21,8 +21,8 @@ namespace ReportUnit
         /// ReportUnit usage
         /// </summary>
         private static string reportUnitUsage = "[INFO] Usage 1:  ReportUnit \"path-to-folder\"" +
-                                                "\n[INFO] Usage 2:  ReportUnit \"input-folder\" \"output-folder\"" +
-                                                "\n[INFO] Usage 3:  ReportUnit \"input.xml\" \"output.html\"";
+                                                "\n[INFO] Usage 2:  ReportUnit \"input-folder\" \"output-folder\" [\"Solution path (will be removed from stack frame file paths)\"|current (assembly path will be used)]" +
+                                                "\n[INFO] Usage 3:  ReportUnit \"input.xml\" \"output.html\" [\"Solution path (will be removed from stack frame file paths)\"|current (assembly path will be used)]";
 
         /// <summary>
         /// Logger
@@ -44,7 +44,7 @@ namespace ReportUnit
         {            
             CopyrightMessage();
 
-            if (args.Length == 0 || args.Length > 2)
+            if (args.Length == 0 || args.Length > 3)
             {
                 logger.Error("Invalid number of arguments specified.\n" + reportUnitUsage);
                 return;
@@ -64,14 +64,14 @@ namespace ReportUnit
                 args[ix] = args[ix].Replace('"', '\\');
             }
 
-            if (args.Length == 2)
+            if (args.Length == 2 || args.Length == 3)
             {
                 if ((Path.GetExtension(args[0]).ToLower().Contains("xml")) && (Path.GetExtension(args[1]).ToLower().Contains("htm")))
                 {
                     if (!Directory.GetParent(args[1]).Exists)
                         Directory.CreateDirectory(Directory.GetParent(args[1]).FullName);
 
-                    new ReportBuilder(Theme.Standard).FileReport(args[0], args[1]);
+                    new ReportBuilder(Theme.Standard).FileReport(args[0], args[1], args.Length > 2?args[2]:null);
                     return;
                 }
 
@@ -86,7 +86,7 @@ namespace ReportUnit
 
                 if (Directory.Exists(args[0]) && Directory.Exists(args[1]))
                 {
-                    new ReportBuilder(Theme.Standard).FolderReport(args[0], args[1]);
+                    new ReportBuilder(Theme.Standard).FolderReport(args[0], args[1], args.Length > 2 ? args[2] : null);
                 }
                 else
                 {

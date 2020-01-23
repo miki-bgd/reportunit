@@ -38,8 +38,8 @@
         ///         BEHAVIOR: This flag will be TRUE
         /// </summary>
         private bool isSingle = false;
-
-        public void FolderReport(string resultsDirectory, string outputDirectory)
+        
+        public void FolderReport(string resultsDirectory, string outputDirectory, string removePath = null)
         {
             List<string> allFiles = Directory.GetFiles(resultsDirectory, "*.*", SearchOption.TopDirectoryOnly).ToList();
             var links = new List<string>();
@@ -64,7 +64,7 @@
                 Console.WriteLine("");
 
                 outputFile = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(file) + ".html");
-                Report reportData = BuildReport(file, outputFile);
+                Report reportData = BuildReport(file, outputFile, removePath);
 
                 if (reportData != null)
                 {
@@ -141,20 +141,21 @@
             FolderReport(resultsDirectory, resultsDirectory);
         }
 
-        public void FileReport(string resultsFile, string outputFile)
+        public void FileReport(string resultsFile, string outputFile, string removePath = null)
         {
             isSingle = true;
 
-            BuildReport(resultsFile, outputFile);
+            BuildReport(resultsFile, outputFile, removePath);
         }
 
-        private Report BuildReport(string resultsFile, string outputFile)
+        private Report BuildReport(string resultsFile, string outputFile, string removePath = null)
         {
             testFileParser = ParserFactory.LoadParser(resultsFile);
 
             if (testFileParser == null) 
                 return null;
 
+            StackTraceFrameParser.Initialize(removePath);
             Report report = testFileParser.ProcessFile();
 
             if (report == null) 
@@ -176,7 +177,8 @@
                                     .Replace(ReportHelper.MarkupFlag("inXml"), Path.GetFullPath(report.FileName))
                                     .Replace(ReportHelper.MarkupFlag("duration"), report.Duration.ToString())
                                     .Replace(ReportHelper.MarkupFlag("result"), report.Status.ToString())
-                                    .Replace(ReportHelper.MarkupFlag("name"), report.AssemblyName);
+                                    .Replace(ReportHelper.MarkupFlag("name"), report.AssemblyName)
+                                    .Replace(ReportHelper.MarkupFlag("assemblypath"), StackTraceFrameParser.Instance.AssemblyPath);
 
                     foreach (KeyValuePair<string, string> pair in report.RunInfo.Info)
                     {
