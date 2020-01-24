@@ -273,6 +273,7 @@ namespace ReportUnit.Parser
                     {
                         errorMsg = "<pre>" + message.InnerText.Trim() + "<br>";
                         var xmlNode = testcase.SelectSingleNode(".//stack-trace");
+                        errorMsg = StackTraceFrameParser.Instance.ParseFrame(errorMsg);
                         if (xmlNode != null)
                             errorMsg += " -> " + StackTraceFrameParser.Instance.ParseFrame(xmlNode.InnerText);
                         //errorMsg += xmlNode != null ? " -> " + xmlNode.InnerText.Replace(" in ", " <br>In ").Replace(" at ", " <br><br>At ") : "";
