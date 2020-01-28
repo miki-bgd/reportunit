@@ -264,10 +264,12 @@
                 foreach (Test test in suite.Tests)
                 {
                     // test-level replacements
+                    string duration = $" ({(test.Duration/ 1000).ToString("0.000000")} s)";
                     html = html.Replace(ReportHelper.MarkupFlag("inserttest"), HTML.File.Test)
                         .Replace(ReportHelper.MarkupFlag("testname"), test.Name)
                         .Replace(ReportHelper.MarkupFlag("teststatus"), test.Status.ToString().ToLower())
-                        .Replace(ReportHelper.MarkupFlag("teststatusmsg"), test.StatusMessage);
+                        .Replace(ReportHelper.MarkupFlag("teststatusmsg"), test.StatusMessage)
+                        .Replace(ReportHelper.MarkupFlag("teststatusmsgduration"), duration);
 
                     foreach (string category in test.Categories)
                     {

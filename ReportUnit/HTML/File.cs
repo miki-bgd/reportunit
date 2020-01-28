@@ -426,8 +426,7 @@
                                         </div>
                                     </div>
                                     <div class='row'>
-                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <span stlye='font-size:1.2em'><!--%ASSEMBLYPATH%--> </span></div>
-                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Total duration: <!--%TOTALDURATION%--> s</div>
+                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <span stlye='font-size:1.2em'><!--%ASSEMBLYPATH%--> </span> <br>Total duration: <!--%TOTALDURATION%--> s</div>
                                         <div class='filters' style='padding-top:0px'>
                                             <div class='input-field col l3 m4 s12 suite-toggle'>
                                                 <select>
@@ -763,7 +762,7 @@
                 return @"
                             <tr class='test-name' style='border-bottom:white'><td colspan='3'><!--%TESTNAME%--></td></tr>
                             <tr>
-                            <td colspan='2' class='<!--%TESTSTATUS%-->'><!--%TESTSTATUS%--><!--%TESTSTATUSMSG%--></td>
+                            <td colspan='2' class='<!--%TESTSTATUS%-->'><!--%TESTSTATUS%--><span style='font-size:0.8em; color:black'><!--%TESTSTATUSMSGDURATION%--></span><!--%TESTSTATUSMSG%--> </td>
                             <td class='test-features <!--%TESTFEATURE%-->'></td>
                         </tr>
                         <!--%INSERTTEST%-->";

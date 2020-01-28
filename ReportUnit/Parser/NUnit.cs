@@ -256,18 +256,24 @@ namespace ReportUnit.Parser
 						tc.Status = success ? Status.Passed : Status.Failed;
 					}
 
-	                if (testcase.Attributes["time"] != null)
+	                //if (testcase.Attributes["time"] != null)
+                    //{
+                    //    try
+                    //    {
+                    //        TimeSpan d;
+                    //        var durationTimeSpan = testcase.Attributes["duration"].InnerText;
+                    //        if (TimeSpan.TryParse(durationTimeSpan, out d))
+                    //        {
+                    //            tc.Duration = d.TotalMilliseconds;
+                    //        }
+                    //    }
+                    //    catch (Exception) { }
+                    //}
+                    if (testcase.Attributes["duration"] != null)
                     {
-                        try
-                        {
-                            TimeSpan d;
-                            var durationTimeSpan = testcase.Attributes["duration"].InnerText;
-                            if (TimeSpan.TryParse(durationTimeSpan, out d))
-                            {
-                                tc.Duration = d.TotalMilliseconds;
-                            }
-                        }
-                        catch (Exception) { }
+                        DateTime d1 = DateTime.ParseExact("0.0", "s.f", null);
+                        DateTime d2 = DateTime.ParseExact(testcase.Attributes["duration"].InnerText, "s.FFFFFFF", null);
+                        tc.Duration = d2.Subtract(d1).TotalMilliseconds;
                     }
 
                     var categories = testcase.SelectNodes(".//property[@name='Category']");
