@@ -124,7 +124,7 @@ namespace ReportUnit.Parser
             }
             catch (Exception) { }
 
-            if (_report.Duration > 0) _report.RunInfo.Info.Add("Duration", string.Format("{0} ms", _report.Duration));
+            if (_report.Duration > 0) _report.RunInfo.Info.Add("Duration", string.Format("{0} s", _report.Duration));
 
 
             try
@@ -185,10 +185,20 @@ namespace ReportUnit.Parser
                 {
                     var startTime = suite.Attributes["start-time"].InnerText.Replace("Z", "");
                     var endTime = suite.Attributes["end-time"].InnerText.Replace("Z", "");
+                    string duration = suite.Attributes["duration"].InnerText;
+                    if (duration == null)
+                        testSuite.Duration = DateTimeHelper.DifferenceInMilliseconds(startTime, endTime);
+                    else
+                    {
+                        DateTime d1 = DateTime.ParseExact("0.0", "s.F", null);
+                        DateTime d2 = DateTime.ParseExact(duration, "s.FFFFFFF", null);
+                        // We need total ms, DateTime object returns only 0-1000.
+                        TimeSpan ts = d2.Subtract(d1);
+                        testSuite.Duration = ts.TotalMilliseconds;
+                    }
 
                     testSuite.StartTime = startTime;
                     testSuite.EndTime = endTime;
-                    testSuite.Duration = DateTimeHelper.DifferenceInMilliseconds(startTime, endTime);
                 }
                 else if (suite.Attributes["time"] != null)
                 {

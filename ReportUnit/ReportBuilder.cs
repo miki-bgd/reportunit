@@ -176,6 +176,7 @@
                                     .Replace(ReportHelper.MarkupFlag("errors"), report.Errors.ToString())
                                     .Replace(ReportHelper.MarkupFlag("inXml"), Path.GetFullPath(report.FileName))
                                     .Replace(ReportHelper.MarkupFlag("duration"), report.Duration.ToString())
+                                    .Replace(ReportHelper.MarkupFlag("totalduration"), report.Duration.ToString("0.000000"))
                                     .Replace(ReportHelper.MarkupFlag("result"), report.Status.ToString())
                                     .Replace(ReportHelper.MarkupFlag("name"), report.AssemblyName)
                                     .Replace(ReportHelper.MarkupFlag("assemblypath"), StackTraceFrameParser.Instance.AssemblyPath);
@@ -235,7 +236,8 @@
                         .Replace(ReportHelper.MarkupFlag("fixtureEndedAt"), suite.EndTime)
                         .Replace(ReportHelper.MarkupFlag("footerDisplay"), "")
                         .Replace(ReportHelper.MarkupFlag("fixtureStartedAtDisplay"), "")
-                        .Replace(ReportHelper.MarkupFlag("fixtureEndedAtDisplay"), "");
+                        .Replace(ReportHelper.MarkupFlag("fixtureEndedAtDisplay"), "")
+                        .Replace(ReportHelper.MarkupFlag("fixtureduration"), (suite.Duration / 1000).ToString("0.000000"));
                 }
                 else if (!string.IsNullOrWhiteSpace(suite.StartTime))
                 {

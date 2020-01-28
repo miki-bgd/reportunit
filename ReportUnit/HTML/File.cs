@@ -15,7 +15,7 @@
                     @"<!DOCTYPE html>
                     <html lang='en'>
                         <!--
-                            ReportUnit [TestSuite Summary] v1.1 | http://reportunit.relevantcodes.com/
+                            ReportUnit [TestSuite Summary] v1.1.3 | http://reportunit.relevantcodes.com/
                             Created by Anshoo Arora (Relevant Codes) | Released under the MIT license
                         --> 
                         <head>
@@ -426,7 +426,8 @@
                                         </div>
                                     </div>
                                     <div class='row'>
-                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <!--%ASSEMBLYPATH%--> </div>
+                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <span stlye='font-size:1.2em'><!--%ASSEMBLYPATH%--> </span></div>
+                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Total duration: <!--%TOTALDURATION%--> s</div>
                                         <div class='filters' style='padding-top:0px'>
                                             <div class='input-field col l3 m4 s12 suite-toggle'>
                                                 <select>
@@ -743,6 +744,7 @@
                                 <div <!--%FOOTERDISPLAY%--> class='fixture-footer'>
                                     <span <!--%FIXTURESTARTEDATDISPLAY%--> alt='Fixture started at time' title='Fixture started at time' class='startedAt'><i class='mdi-device-access-time'></i><!--%FIXTURESTARTEDAT%--></span>
                                     <span <!--%FIXTUREENDEDATDISPLAY%--> alt='Fixture ended at time' title='Fixture ended at time' class='endedAt'><i class='mdi-device-access-time'></i><!--%FIXTUREENDEDAT%--></span>
+                                    <span> ( <!--%FIXTUREDURATION%--> s)</span>
                                 </div>
                             </div>
                         </div>
