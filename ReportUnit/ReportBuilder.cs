@@ -223,7 +223,8 @@
             {
                 html = html.Replace(ReportHelper.MarkupFlag("inserttest"), "")
                         .Replace(ReportHelper.MarkupFlag("insertfixture"), HTML.File.Fixture)
-                        .Replace(ReportHelper.MarkupFlag("fixturename"), suite.Name + $"({suite.Tests.Count()} tests)")
+                        .Replace(ReportHelper.MarkupFlag("fixturename"), suite.Name)
+                        .Replace(ReportHelper.MarkupFlag("fixturetestcount"), $" ({suite.Tests.Count()} tests)")
                         .Replace(ReportHelper.MarkupFlag("fixtureresult"), suite.Status.ToString().ToLower());
 
                 if (!string.IsNullOrWhiteSpace(suite.StatusMessage))

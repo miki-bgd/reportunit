@@ -723,7 +723,7 @@
                 return @"<div class='col s4'>
                             <div class='card-panel'>
                                 <div class='fixture-head'>
-                                    <span class='fixture-name'><!--%FIXTURENAME%--></span>
+                                    <span class='fixture-name'><!--%FIXTURENAME%--> <span style='font-size:0.7em;'><!--%FIXTURETESTCOUNT%--></span></span>
                                     <span class='fixture-result <!--%FIXTURERESULT%-->'><!--%FIXTURERESULT%--></span>
                                 </div>
                                 <div class='fixture-content'>
