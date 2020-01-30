@@ -426,7 +426,7 @@
                                         </div>
                                     </div>
                                     <div class='row'>
-                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <span stlye='font-size:1.2em'><!--%ASSEMBLYPATH%--> </span> <br>Total duration: <!--%TOTALDURATION%--> s</div>
+                                        <div class='row' style='padding-left:20px; font-size:1.2em'>Path: <span stlye='font-size:1.2em'><!--%ASSEMBLYPATH%--> </span> <br>Total tests: <!--%TOTALTESTSCOUNT%--><br>Total duration: <!--%TOTALDURATION%--> s</div>
                                         <div class='filters' style='padding-top:0px'>
                                             <div class='input-field col l3 m4 s12 suite-toggle'>
                                                 <select>

@@ -176,6 +176,7 @@
                                     .Replace(ReportHelper.MarkupFlag("errors"), report.Errors.ToString())
                                     .Replace(ReportHelper.MarkupFlag("inXml"), Path.GetFullPath(report.FileName))
                                     .Replace(ReportHelper.MarkupFlag("duration"), report.Duration.ToString())
+                                    .Replace(ReportHelper.MarkupFlag("totaltestscount"), report.TestFixtures.Sum(x=>x.Tests.Count).ToString())
                                     .Replace(ReportHelper.MarkupFlag("totalduration"), report.Duration.ToString("0.000000"))
                                     .Replace(ReportHelper.MarkupFlag("result"), report.Status.ToString())
                                     .Replace(ReportHelper.MarkupFlag("name"), report.AssemblyName)
@@ -222,7 +223,7 @@
             {
                 html = html.Replace(ReportHelper.MarkupFlag("inserttest"), "")
                         .Replace(ReportHelper.MarkupFlag("insertfixture"), HTML.File.Fixture)
-                        .Replace(ReportHelper.MarkupFlag("fixturename"), suite.Name)
+                        .Replace(ReportHelper.MarkupFlag("fixturename"), suite.Name + $"({suite.Tests.Count()} tests)")
                         .Replace(ReportHelper.MarkupFlag("fixtureresult"), suite.Status.ToString().ToLower());
 
                 if (!string.IsNullOrWhiteSpace(suite.StatusMessage))
