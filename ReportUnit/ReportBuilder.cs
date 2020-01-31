@@ -221,10 +221,11 @@
             // run for each test fixture
             foreach (TestSuite suite in report.TestFixtures)
             {
+                int failedTestCount = suite.Tests.Where(x => x.Status == Status.Failed).Count();
                 html = html.Replace(ReportHelper.MarkupFlag("inserttest"), "")
                         .Replace(ReportHelper.MarkupFlag("insertfixture"), HTML.File.Fixture)
                         .Replace(ReportHelper.MarkupFlag("fixturename"), suite.Name)
-                        .Replace(ReportHelper.MarkupFlag("fixturetestcount"), $" ({suite.Tests.Count()} tests)")
+                        .Replace(ReportHelper.MarkupFlag("fixturetestcount"), $" ({suite.Tests.Count()} tests {(failedTestCount > 0? "/ <span style='color:red'>" + failedTestCount + " failed</span>":"")})")
                         .Replace(ReportHelper.MarkupFlag("fixtureresult"), suite.Status.ToString().ToLower());
 
                 if (!string.IsNullOrWhiteSpace(suite.StatusMessage))
