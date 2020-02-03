@@ -233,7 +233,8 @@ namespace ReportUnit.Parser
                     errorMsg = descMsg = "";
 
                     var tc = new Test();
-					tc.Name = testcase.Attributes["name"].InnerText.Replace("<", "[").Replace(">", "]").Replace(testSuite.Name + ".", "").Replace(_fileNameWithoutExtension + ".", "");
+					tc.Name = testcase.Attributes["name"].InnerText.Replace("<", "[").Replace(">", "]").Replace(testSuite.Name + ".", "").Replace(_fileNameWithoutExtension + ".", "")
+                        .Replace(",",",<br>").Replace("(", "(<br>");
 
 					// figure out the status reslt of the test
 	                if (testcase.Attributes["result"] != null)
